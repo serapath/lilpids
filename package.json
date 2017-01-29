@@ -1,6 +1,6 @@
 {
   "name": "lilpids",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Dead simple process manager with few features (features cli & programmatic use)",
   "main": "index.js",
   "scripts": {

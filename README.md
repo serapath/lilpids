@@ -18,11 +18,16 @@ var lilpids = require('lilpids')
 
 var stream$ = lilpids()
 
-stream$.on('error', function (error) { throw error })
+stream$.on('error', function (error) {
+  throw error
+})
 
 stream$.on('data', function (pids) {
-  console.log(pids)
-  // e.g. { pid: '14780', service: 'node test/a.js' }
+  console.log(pids) // e.g.
+  /*
+  [ { pid: '15679', service: 'node test/a.js' },
+    { pid: '15685', service: 'node test/b.js' } ]
+  */
 })
 
 stream$.write([
@@ -31,10 +36,8 @@ stream$.write([
 ])
 
 setTimeout(function () {
-  stream$.write([
-    'node test/a.js'
-  ])
-}, 3000)
+  stream$.write([ 'node test/a.js' ])
+}, 15000)
 
 ```
 
