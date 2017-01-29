@@ -1,7 +1,7 @@
 # lilpids
 Dead simple process manager with few features (features cli &amp; programmatic use)
 
-inspiration comes from the [`benny-hill`](https://www.npmjs.com/package/benny-hill) module from [@mafintosh](https://www.npmjs.com/~mafintosh)
+inspiration comes from the [`lil-pids`](https://www.npmjs.com/package/lil-pids) module from [@mafintosh](https://www.npmjs.com/~mafintosh)
 
 ![omg](http://forgifs.com/gallery/d/27703-5/Excited-kid-birthday-party.gif?)
 
