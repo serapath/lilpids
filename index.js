@@ -8,6 +8,8 @@ var respawn = require('respawn')
 var chalk = require('chalk')
 var through2 = require('through2')
 
+var isMainModule = require.main === module
+
 var BIN_SH = process.platform === 'android' ? '/system/bin/sh' : '/bin/sh'
 var CMD_EXE = process.env.comspec || 'cmd.exe'
 
@@ -17,13 +19,13 @@ var colors = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'gra
 var servicesFile = process.argv[2]
 var pidsFile = process.argv[3]
 
-if (require.main === module) lilpids(servicesFile, pidsFile)
+if (isMainModule) lilpids(servicesFile, pidsFile)
 
 module.exports = lilpids
 
 function lilpids (servicesFile, pidsFile) {
 
-  if (!servicesFile && !module.parent) {
+  if (!servicesFile && isMainModule) {
     console.error('Usage: lil-pids [services-file] [pids-file?]')
     process.exit(1)
   }
@@ -33,7 +35,7 @@ function lilpids (servicesFile, pidsFile) {
   var services = []
   var monitors = {}
 
-  if (module.parent) {
+  if (!isMainModule) {
     pidsFile = true
     var lilpids$ = through2.obj(function (paths, encoding, next) {
       if (Array.isArray(paths)) {
@@ -60,7 +62,7 @@ function lilpids (servicesFile, pidsFile) {
       return prefix(monitors[cmd].pid) + cmd + '\n'
     })
 
-    if (module.parent) return lilpids$.push(lines.filter(function (x) {
+    if (!isMainModule) return lilpids$.push(lines.filter(function (x) {
       return x
     }).map(function (line) {
       var proc = line.split(':')
