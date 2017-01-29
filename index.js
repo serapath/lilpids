@@ -17,7 +17,7 @@ var colors = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'gra
 var servicesFile = process.argv[2]
 var pidsFile = process.argv[3]
 
-if (!module.parent) lilpids(servicesFile, pidsFile)
+if (require.main === module) lilpids(servicesFile, pidsFile)
 
 module.exports = lilpids
 
